@@ -37,6 +37,9 @@ cask "protonvpn"
 cask "proton-mail"
 cask "spotify"
 cask "logi-options+"
+cask "aldente"
+cask "telegram"
+cask "discord"
 
 mas "Bitwarden", id: 1352778147
 mas "uBlock Origin Lite", id: 6745342698
