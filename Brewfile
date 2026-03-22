@@ -31,7 +31,6 @@ brew "shellcheck"
 
 cask "ghostty"
 cask "visual-studio-code"
-cask "rectangle"
 cask "claude"
 cask "protonvpn"
 cask "proton-mail"
@@ -40,6 +39,9 @@ cask "logi-options+"
 cask "aldente"
 cask "telegram"
 cask "discord"
+cask "chatgpt"
+cask "rectangle"
+cask "codex"
 
 mas "Bitwarden", id: 1352778147
 mas "uBlock Origin Lite", id: 6745342698
