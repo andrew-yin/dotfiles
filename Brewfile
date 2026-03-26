@@ -17,6 +17,7 @@ brew "bat"
 brew "eza"
 brew "delta"
 brew "mas"
+brew "tree-sitter-cli"
 
 # ---------------------------------------------------------------------------
 # Dev tools
@@ -24,6 +25,7 @@ brew "mas"
 
 brew "gh"
 brew "shellcheck"
+brew "neovim"
 
 # ---------------------------------------------------------------------------
 # macOS apps (cask)
@@ -42,6 +44,9 @@ cask "discord"
 cask "chatgpt"
 cask "rectangle"
 cask "codex"
+cask "helium-browser"
+cask "anki"
+cask "claude-code"
 
 mas "Bitwarden", id: 1352778147
 mas "uBlock Origin Lite", id: 6745342698
