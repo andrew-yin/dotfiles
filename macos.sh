@@ -21,3 +21,7 @@ killall Dock
  
 echo "✓ Dock configured: autohide on, delay=0s, animation=0.15s"
 
+
+# VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
