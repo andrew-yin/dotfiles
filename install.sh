@@ -99,6 +99,25 @@ sudo_cmd() {
   sudo "$@"
 }
 
+install_linux_special_package() {
+  case "$1" in
+    chezmoi)
+      need_cmd curl
+      need_cmd install
+      need_cmd mktemp
+      echo "Installing chezmoi with the official installer..."
+      local temp_dir
+      temp_dir=$(mktemp -d)
+      trap 'rm -rf "$temp_dir"' RETURN
+      sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$temp_dir"
+      sudo_cmd install "$temp_dir/chezmoi" /usr/local/bin/chezmoi
+      ;;
+    *)
+      fail "No Linux install method defined for Brewfile formula: $1"
+      ;;
+  esac
+}
+
 install_linux_packages() {
   [[ -f /etc/debian_version ]] || fail "Linux package install currently supports apt on Debian/Ubuntu only"
   need_cmd awk
@@ -107,22 +126,36 @@ install_linux_packages() {
   local brew_pkg
   local apt_pkg
   local -a apt_packages=()
+  local -a special_packages=()
 
   while IFS= read -r brew_pkg; do
     [[ -n "$brew_pkg" ]] || continue
+    case "$brew_pkg" in
+      chezmoi)
+        special_packages+=("$brew_pkg")
+        continue
+        ;;
+    esac
     if ! apt_pkg=$(map_brew_to_apt "$brew_pkg"); then
       fail "No apt mapping defined for Brewfile formula: $brew_pkg"
     fi
     apt_packages+=("$apt_pkg")
   done < <(extract_cross_platform_brews)
 
-  ((${#apt_packages[@]} > 0)) || fail "No cross-platform Brewfile packages found to install"
+  (( ${#apt_packages[@]} + ${#special_packages[@]} > 0 )) || fail "No cross-platform Brewfile packages found to install"
 
   echo "Updating apt package index..."
   sudo_cmd apt-get update
 
-  echo "Installing cross-platform packages with apt..."
-  sudo_cmd apt-get install -y "${apt_packages[@]}"
+  if ((${#apt_packages[@]} > 0)); then
+    echo "Installing cross-platform packages with apt..."
+    sudo_cmd apt-get install -y "${apt_packages[@]}"
+  fi
+
+  local special_pkg
+  for special_pkg in "${special_packages[@]}"; do
+    install_linux_special_package "$special_pkg"
+  done
 }
 
 main() {
