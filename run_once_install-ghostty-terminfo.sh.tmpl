@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+tic -xe xterm-ghostty "{{ .chezmoi.sourceDir }}/ghostty.terminfo"
+echo "✓ Ghostty terminfo installed"

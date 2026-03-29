@@ -1,5 +1,5 @@
 brew "git"
-brew "stow"
+brew "chezmoi"
 brew "vim"
 brew "curl"
 brew "wget"
