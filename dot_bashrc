@@ -1,3 +1,7 @@
+# shellcheck shell=sh
 # ~/.bashrc — shared shell config (sourced by both bash and zsh)
-export SSH_AUTH_SOCK=/Users/yinny/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+bitwarden_ssh_sock="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 
+if [ -z "${SSH_AUTH_SOCK:-}" ] && [ -S "$bitwarden_ssh_sock" ]; then
+    export SSH_AUTH_SOCK="$bitwarden_ssh_sock"
+fi

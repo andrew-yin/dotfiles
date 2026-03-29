@@ -1,6 +1,5 @@
 Brewfile
 ghostty.terminfo
-macos.sh
 LICENSE.md
 README.md
 .DS_Store

@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if ! command -v tic &>/dev/null; then
+    echo "Skipping Ghostty terminfo install: tic not found"
+    exit 0
+fi
+
+if [ ! -f "{{ .chezmoi.sourceDir }}/ghostty.terminfo" ]; then
+    echo "Skipping Ghostty terminfo install: source file not found"
+    exit 0
+fi
+
 tic -xe xterm-ghostty "{{ .chezmoi.sourceDir }}/ghostty.terminfo"
 echo "✓ Ghostty terminfo installed"
