@@ -18,7 +18,6 @@ brew "gh"
 brew "tmux"
 brew "shellcheck"
 brew "neovim"
-brew "tailscale"
 
 cask "visual-studio-code"
 cask "claude"
@@ -35,6 +34,7 @@ cask "anki"
 cask "claude-code"
 cask "codex-app"
 cask "codex"
+cask "tailscale-app"
 
 mas "Bitwarden", id: 1352778147
 mas "uBlock Origin Lite", id: 6745342698
