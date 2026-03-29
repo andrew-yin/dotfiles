@@ -85,6 +85,7 @@ map_brew_to_apt() {
   case "$1" in
     fd) echo "fd-find" ;;
     delta) echo "git-delta" ;;
+    ncurses) echo "ncurses-bin" ;;
     *) echo "$1" ;;
   esac
 }
