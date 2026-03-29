@@ -12,31 +12,33 @@ brew "htop"
 brew "bat"
 brew "eza"
 brew "delta"
-brew "mas"
 brew "tree-sitter-cli"
 brew "gh"
 brew "tmux"
 brew "shellcheck"
 brew "neovim"
 
-cask "visual-studio-code"
-cask "claude"
-cask "protonvpn"
-cask "proton-mail"
-cask "spotify"
-cask "logi-options+"
-cask "telegram"
-cask "discord"
-cask "chatgpt"
-cask "rectangle"
-cask "helium-browser"
-cask "anki"
-cask "claude-code"
-cask "codex-app"
-cask "codex"
-cask "tailscale-app"
+if OS.mac?
+  brew "mas"
 
-mas "Bitwarden", id: 1352778147
-mas "uBlock Origin Lite", id: 6745342698
-mas "SimpleLogin for Safari", id: 6475835429
+  cask "visual-studio-code"
+  cask "claude"
+  cask "protonvpn"
+  cask "proton-mail"
+  cask "spotify"
+  cask "logi-options+"
+  cask "telegram"
+  cask "discord"
+  cask "chatgpt"
+  cask "rectangle"
+  cask "helium-browser"
+  cask "anki"
+  cask "claude-code"
+  cask "codex-app"
+  cask "codex"
+  cask "tailscale-app"
 
+  mas "Bitwarden", id: 1352778147
+  mas "uBlock Origin Lite", id: 6745342698
+  mas "SimpleLogin for Safari", id: 6475835429
+end
