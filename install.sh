@@ -100,9 +100,18 @@ sudo_cmd() {
   sudo "$@"
 }
 
+apt_package_installed() {
+  dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -qx "install ok installed"
+}
+
 install_linux_special_package() {
   case "$1" in
     chezmoi)
+      if command -v chezmoi >/dev/null 2>&1; then
+        echo "chezmoi already installed; skipping"
+        return
+      fi
+
       need_cmd curl
       need_cmd install
       need_cmd mktemp
@@ -123,10 +132,12 @@ install_linux_packages() {
   [[ -f /etc/debian_version ]] || fail "Linux package install currently supports apt on Debian/Ubuntu only"
   need_cmd awk
   need_cmd apt-get
+  need_cmd dpkg-query
 
   local brew_pkg
   local apt_pkg
   local -a apt_packages=()
+  local -a missing_apt_packages=()
   local -a special_packages=()
 
   while IFS= read -r brew_pkg; do
@@ -145,12 +156,18 @@ install_linux_packages() {
 
   (( ${#apt_packages[@]} + ${#special_packages[@]} > 0 )) || fail "No cross-platform Brewfile packages found to install"
 
-  echo "Updating apt package index..."
-  sudo_cmd apt-get update
+  local pkg
+  for pkg in "${apt_packages[@]}"; do
+    if ! apt_package_installed "$pkg"; then
+      missing_apt_packages+=("$pkg")
+    fi
+  done
 
-  if ((${#apt_packages[@]} > 0)); then
+  if ((${#missing_apt_packages[@]} > 0)); then
+    echo "Updating apt package index..."
+    sudo_cmd apt-get update
     echo "Installing cross-platform packages with apt..."
-    sudo_cmd apt-get install -y "${apt_packages[@]}"
+    sudo_cmd apt-get install -y "${missing_apt_packages[@]}"
   fi
 
   local special_pkg
