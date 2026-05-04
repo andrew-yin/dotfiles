@@ -47,6 +47,7 @@ if OS.mac?
   cask "visual-studio-code"
 
   mas "Bitwarden", id: 1352778147
+  mas "Perplexity", id: 6714467650
   mas "SimpleLogin for Safari", id: 6475835429
   mas "uBlock Origin Lite", id: 6745342698
   mas "WeChat", id: 836500024
