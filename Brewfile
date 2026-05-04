@@ -19,6 +19,7 @@ brew "tree-sitter-cli"
 brew "uv"
 brew "vim"
 brew "wget"
+brew "glow"
 
 if OS.mac?
   brew "mas"
@@ -26,11 +27,12 @@ if OS.mac?
   cask "anki"
   cask "chatgpt"
   cask "claude"
-  cask "claude-code"
+  cask "claude-code@latest"
   cask "codex"
   cask "codex-app"
   cask "discord"
   cask "helium-browser"
+  cask "karabiner-elements"
   cask "logi-options+"
   cask "notion"
   cask "obsidian"
@@ -45,4 +47,5 @@ if OS.mac?
   mas "Bitwarden", id: 1352778147
   mas "SimpleLogin for Safari", id: 6475835429
   mas "uBlock Origin Lite", id: 6745342698
+  mas "WeChat", id: 836500024
 end
