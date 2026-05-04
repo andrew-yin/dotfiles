@@ -31,6 +31,7 @@ if OS.mac?
   cask "codex"
   cask "codex-app"
   cask "discord"
+  cask "ghostty"
   cask "helium-browser"
   cask "karabiner-elements"
   cask "logi-options+"
